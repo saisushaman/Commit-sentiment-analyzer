@@ -1,0 +1,17 @@
+======================================================================
+SENTIMENT ANALYSIS - facebook/react
+======================================================================
+
+Total Commits: 200
+
+Sentiment Distribution:
+  Positive: 99 (49.5%)
+  Neutral:  48 (24.0%)
+  Negative: 53 (26.5%)
+
+Score Statistics:
+  Average: 0.224
+  Median:  0.037
+  Min:     -0.942
+  Max:     0.987
+  Std Dev: 0.528

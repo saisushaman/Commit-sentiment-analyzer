@@ -24,7 +24,7 @@ class CommitFetcher:
         self.repo = repo
         self.base_url = f"https://api.github.com/repos/{owner}/{repo}/commits"
         
-    def fetch_commits(self, limit: int = 50, per_page: int = 100) -> List[Dict]:
+    def fetch_commits(self, limit: int = 200, per_page: int = 100) -> List[Dict]:
         """
         Fetch commit messages from GitHub.
         

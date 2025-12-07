@@ -33,16 +33,16 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python main.py facebook react
-  python main.py microsoft vscode --limit 100
-  python main.py torchvision --limit 200 --output my_results.png
+  python main.py microsoft vscode
+  python main.py facebook react --limit 100
+  python main.py tensorflow tensorflow --limit 200 --output my_results.png
         """
     )
     
     parser.add_argument('owner', help='GitHub repository owner (username or organization)')
     parser.add_argument('repo', nargs='?', help='Repository name (optional, can be part of owner/repo)')
-    parser.add_argument('--limit', type=int, default=50, 
-                       help='Maximum number of commits to analyze (default: 50)')
+    parser.add_argument('--limit', type=int, default=200, 
+                       help='Maximum number of commits to analyze (default: 200)')
     parser.add_argument('--output', type=str, default='sentiment_analysis.png',
                        help='Output file name for visualization (default: sentiment_analysis.png)')
     parser.add_argument('--validate', action='store_true',
