@@ -1,0 +1,20 @@
+Accuracy: 34/48 = 70.8%
+Correct: 34
+Incorrect: 14
+Total: 48
+
+Misclassified cases:
+  'Enhanced performance significantly' - Expected: positive, Got: neutral (score: 0.000)
+  'Resolved issue successfully' - Expected: negative, Got: positive (score: 0.599)
+  'Resolved critical security vulnerability' - Expected: negative, Got: neutral (score: -0.026)
+  'Fixed data corruption bug' - Expected: negative, Got: neutral (score: 0.000)
+  'Update version number' - Expected: neutral, Got: positive (score: 0.077)
+  'Rename variables for clarity' - Expected: neutral, Got: positive (score: 0.402)
+  'Resolved issue and optimized code' - Expected: negative, Got: positive (score: 0.572)
+  'Implemented new API endpoint' - Expected: positive, Got: neutral (score: 0.000)
+  'Fixed null pointer exception' - Expected: negative, Got: neutral (score: 0.000)
+  'Added unit tests for module' - Expected: positive, Got: neutral (score: 0.000)
+  'Resolved race condition' - Expected: neutral, Got: positive (score: 0.178)
+  'feat: add new authentication system' - Expected: positive, Got: neutral (score: 0.000)
+  'fix: resolve memory leak in cache' - Expected: negative, Got: positive (score: 0.052)
+  'test: add integration tests' - Expected: positive, Got: neutral (score: 0.000)

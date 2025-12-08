@@ -73,3 +73,4 @@ with open('diagnostic_results.txt', 'w') as f:
         f.write(f"  {date}: {count} commits\n")
 
 print("\n✓ Detailed results saved to diagnostic_results.txt")
+

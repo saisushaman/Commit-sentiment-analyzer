@@ -37,3 +37,4 @@ print("VERIFICATION:")
 print(f"  Total commits in DataFrame: {len(df)}")
 print(f"  Date range: {df['date'].min()} to {df['date'].max()}")
 print("="*70)
+

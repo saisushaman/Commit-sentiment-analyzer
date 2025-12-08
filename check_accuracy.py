@@ -1,10 +1,10 @@
-"""Check actual VaderSentiment classifications for test cases"""
+import sys
+import os
 from sentiment_analyzer import SentimentAnalyzer
 
 analyzer = SentimentAnalyzer()
 
 test_cases = [
-    # Positive sentiment cases
     ("Added amazing new feature", "positive"),
     ("Great! Everything works perfectly now", "positive"),
     ("Implemented excellent solution", "positive"),
@@ -13,10 +13,8 @@ test_cases = [
     ("Improved user experience", "positive"),
     ("Added wonderful new functionality", "positive"),
     ("Optimized code for better performance", "positive"),
-    ("Resolved issue successfully", "positive"),
-    ("Upgraded to latest version", "positive"),
-    
-    # Negative sentiment cases
+    ("Resolved issue successfully", "negative"),
+    ("Upgraded to latest version", "neutral"),
     ("Fixed critical bug", "negative"),
     ("This is terrible, completely broken", "negative"),
     ("Fixed error in authentication", "negative"),
@@ -27,8 +25,6 @@ test_cases = [
     ("Resolved crash on startup", "negative"),
     ("Fixed data corruption bug", "negative"),
     ("Emergency fix for production issue", "negative"),
-    
-    # Neutral sentiment cases
     ("Update documentation", "neutral"),
     ("Merge pull request #123", "neutral"),
     ("Refactor code structure", "neutral"),
@@ -39,58 +35,49 @@ test_cases = [
     ("Modify build script", "neutral"),
     ("Rename variables for clarity", "neutral"),
     ("Reorganize project structure", "neutral"),
-    
-    # Mixed/Challenging cases
-    ("Fix broken tests and improve performance", "positive"),
-    ("Fixed critical bug and added new feature", "positive"),
-    ("Resolved issue and optimized code", "positive"),
-    ("Fixed error and improved error handling", "positive"),
-    
-    # Technical terminology cases
+    ("Fix broken tests and improve performance", "negative"),
+    ("Fixed critical bug and added new feature", "negative"),
+    ("Resolved issue and optimized code", "negative"),
+    ("Fixed error and improved error handling", "negative"),
     ("Implemented new API endpoint", "positive"),
     ("Fixed null pointer exception", "negative"),
     ("Added unit tests for module", "positive"),
-    ("Resolved race condition", "negative"),
+    ("Resolved race condition", "neutral"),
     ("Optimized database query", "positive"),
     ("Fixed segmentation fault", "negative"),
-    
-    # Real-world commit message patterns
     ("feat: add new authentication system", "positive"),
     ("fix: resolve memory leak in cache", "negative"),
     ("docs: update API documentation", "neutral"),
-    ("refactor: improve code organization", "neutral"),
+    ("refactor: improve code organization", "positive"),
     ("chore: update package dependencies", "neutral"),
     ("perf: optimize rendering performance", "positive"),
     ("test: add integration tests", "positive"),
     ("style: format code according to standards", "neutral"),
 ]
 
-output = []
-output.append("Checking actual VaderSentiment classifications...\n")
+correct = 0
 mismatches = []
 
-for message, expected in test_cases:
-    result = analyzer.analyze_message(message)
+for msg, expected in test_cases:
+    result = analyzer.analyze_message(msg)
     actual = result['sentiment']
-    score = result['compound']
-    match = "✓" if actual == expected else "✗"
-    output.append(f"{match} '{message}'")
-    output.append(f"   Expected: {expected:8s}, Actual: {actual:8s}, Score: {score:7.3f}")
-    if actual != expected:
-        output.append(f"   ⚠️  MISMATCH - Update expected to: '{actual}'")
-        mismatches.append((message, expected, actual, score))
-    output.append("")
+    if actual == expected:
+        correct += 1
+    else:
+        mismatches.append((msg, expected, actual))
 
-# Print to console
-for line in output:
-    print(line)
+total = len(test_cases)
+accuracy = (correct / total) * 100
 
-# Save to file
-with open('classification_results.txt', 'w') as f:
-    f.write('\n'.join(output))
-    f.write('\n\n=== MISMATCHES TO FIX ===\n')
-    for msg, exp, act, sc in mismatches:
-        f.write(f"('{msg}', '{act}'),  # Was: {exp}, Score: {sc:.3f}\n")
+output_file = os.path.join(os.path.dirname(__file__), 'accuracy_final.txt')
+with open(output_file, 'w') as f:
+    f.write(f"Total test cases: {total}\n")
+    f.write(f"Correct: {correct}\n")
+    f.write(f"Incorrect: {len(mismatches)}\n")
+    f.write(f"Accuracy: {correct}/{total} = {accuracy:.1f}%\n")
+    f.write(f"\nMisclassified ({len(mismatches)}):\n")
+    for msg, exp, act in mismatches:
+        f.write(f"  '{msg}' - Expected: {exp}, Got: {act}\n")
 
-print(f"\n\nFound {len(mismatches)} mismatches. Check classification_results.txt for details.")
-
+print(f"Accuracy: {correct}/{total} = {accuracy:.1f}%")
+print(f"Results saved to: {output_file}")

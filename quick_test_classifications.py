@@ -28,3 +28,4 @@ for msg in test_messages:
 
 with open('quick_results.txt', 'w') as f:
     f.write('\n'.join(results))
+

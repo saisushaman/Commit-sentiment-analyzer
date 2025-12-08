@@ -50,3 +50,4 @@ for date, count in daily_totals.head(10).items():
 print(f"\n" + "="*70)
 print("If daily_totals.sum() = DataFrame length, visualization should show all commits")
 print("="*70)
+

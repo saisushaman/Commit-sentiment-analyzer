@@ -67,3 +67,4 @@ with open('REAL_COUNT.txt', 'w') as f:
     f.write(f"Scatter plot points: {len(df_sorted)}\n")
 
 print("\n✓ Results saved to REAL_COUNT.txt")
+

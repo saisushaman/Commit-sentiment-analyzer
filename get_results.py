@@ -97,3 +97,4 @@ except Exception as e:
     with open('analysis_error.txt', 'w') as f:
         f.write(error_msg)
     sys.exit(1)
+
